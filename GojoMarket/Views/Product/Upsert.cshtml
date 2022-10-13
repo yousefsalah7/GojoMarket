@@ -1,0 +1,164 @@
+﻿@model GojoMarket.Models.ViewModels.ProductVM
+
+@{
+    var title = "Create New Product";
+}
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data" >
+    @if (Model.Product.Id!=0)
+    {
+        title = "Edit product"; 
+        <input asp-for="Product.Id" hidden /> 
+    }
+    
+    <div class="border p-2">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-select-lg row">
+            <h2 class="text-info px-1 ">
+                @title
+            </h2>
+            <div class="row mt-2">
+                <div class="col-8">
+                    <div class="form-group row  mt-2">
+                        <div class="col-4">
+                            <label asp-for="Product.Name"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Product.Name" class="form-control" />
+                            <span asp-validation-for="Product.Name" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="form-group row  mt-2">
+                        <div class="col-4">
+                            <label asp-for="Product.Price"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Product.Price" class="form-control" />
+                            <span asp-validation-for="Product.Price" class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+                    <div class="form-group row  mt-2">
+                        <div class="col-4">
+                            <label asp-for="Product.Description"></label>
+                        </div>
+                        <div class="col-8">
+                            <textarea asp-for="Product.Description" id="summernote" class="form-control  " placeholder=""></textarea>
+                            <span asp-validation-for="Product.Description" class="text-danger"></span>
+
+                        </div>
+                        <div class="col-4">
+                            <label asp-for="Product.ShortDesc"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Product.ShortDesc" class="form-control" />
+                            <span asp-validation-for="Product.ShortDesc" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row  mt-2">
+                        <div class="col-4">
+                            <label asp-for="Product.CategoryId"></label>
+                        </div>
+                        <div class="col-8">
+                            <select asp-for="Product.CategoryId" class="form-select form-check" asp-items="@Model.CategorySelectList">
+                                <option disabled selected >---Select Category---</option>
+                            </select>
+                            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+                    <div class="form-group row  mt-2">
+                        <div class="col-4">
+                            <label asp-for="Product.Image"></label>
+                        </div>
+                        <div class="col-8">
+                            <input type="file" name="file" id="uploadbox" placeholder="@Model.Product.Image"  multiple  class="form-control " />
+                            
+
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-8 offset-4 row mt-4">
+
+                            <div class="col">
+                                @if (Model.Product.Id != 0)
+                                {
+                                    <button type="submit" onclick="Done()" class="btn btn-outline-primary w-100">
+                                    <i class="fa-solid fa-wrench"></i> &nbsp; Update
+                                </button>
+                                }
+                                else{
+                                    <button type="submit" onclick="validateinput()" class="btn btn-outline-primary w-100" asp-controller="Product" asp-action="Upsert">
+                                        <i class="fa-solid fa-plus"></i> &nbsp; Create
+                                </button>
+                                }
+                               
+
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-outline-success w-100"> <i class="fa-solid fa-arrow-left"></i> &nbsp; Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 p-4 " >
+                    @if (Model.Product.Id != 0)
+                    {
+                        <img src="@WC.imagePath@Model.Product.Image"  width ="100%" style="border-radius:10px; border: 1px solid red;" />
+                       
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts{
+
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote(
+            {
+                html:"",
+                code:false,
+                    isEmpty:true,
+                height:200
+            });
+        });
+        function validateinput()
+        { 
+            if(document.getElementById("uploadbox").value=="")
+            {
+                Swal.fire(
+                    'Missing Field',
+                    'please upload an image!',
+                    'error'
+                )
+            }else{
+                Swal.fire(
+                    'Done',
+                    'Product Added',
+                    'success'
+                )
+            }
+
+        }
+        function Done() {
+           
+                Swal.fire(
+                    'Done',
+                    'Product Added',
+                    'success'
+                )
+           
+
+        }
+    </script>
+}

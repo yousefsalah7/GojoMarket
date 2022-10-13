@@ -1,0 +1,59 @@
+﻿@model GojoMarket.Models.ViewModels.DetailsVM
+
+<div class="">
+    <form method="post">
+
+        <div class="container backgroundWhite w-auto pt-4">
+            <div class="card w-auto " style="border:1px solid #000000; ">
+                <div class="card-header w-auto bg-dark text-light m-0 row container" style="border-radius: 0px;width:100%">
+                    <div class="col-12 col-md-6">
+                        <h1 class="text-white">@Model.Product.Name</h1>
+                    </div>
+                    <div class="col-12 col-md-6 text-end ">
+                        <h1 class="text-warning">@Model.Product.Price.ToString("c")</h1>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container rounded ">
+                        <div class="row">
+                            <div class="col-12 col-lg-4 p-1 text-center">
+                                <img src="@WC.imagePath@Model.Product.Image" width="100%" class="rounded" />
+                            </div>
+                            <div class="col-12 col-lg-8">
+                                <div class="row pl-3">
+
+                                    <div class="col-12 col-lg-4 p-1">
+                                        <span class="badge p-2 border" style="background-color:peru;width:150px;font-size:large">@Model.Product.Category.Name</span>
+                                        @*<span class="badge p-3 border" style="background-color:azure">ApplicationType.Name</span>*@
+                                        <h3 class="text-success"></h3>
+
+                                        <p class="text-secondary">@Html.Raw(Model.Product.Description)</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer w-auto bg-dark" style="width:100%">
+                    <div class="row">
+                        <div class="col-16 col-md-6 pb-0 ">
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-success btn-square form-control btn-lg" style="height:50px;">Back to List</a>
+                        </div>
+                        <div class="col-12 col-md-6 ">
+                            @if (Model.ExistInCart)
+                            {
+                                <a asp-controller="Home" asp-action="Index" class="btn btn-success btn-square form-control btn-lg" style="height:50px;">Back to List</a>
+
+                            }else{
+
+                            <button type="submit" class="btn btn-info form-control btn-lg" style="height:50px;">Add to Cart</button>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
