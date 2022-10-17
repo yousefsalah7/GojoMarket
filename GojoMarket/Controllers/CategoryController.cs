@@ -1,9 +1,11 @@
 ﻿using GojoMarket.Data;
 using GojoMarket.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GojoMarket.Controllers
 {
+    [Authorize(Roles =WC.AdminRole)]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;

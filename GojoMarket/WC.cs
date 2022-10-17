@@ -2,6 +2,10 @@
 {
     public static class WC
     {
-        public static string imagePath= @"\images\product\";
+        public const string imagePath= @"\images\product\";
+        public const string shoppingCart= "ShoppingCart";
+        public const string AdminRole= "Admin";
+        public const string CustomerRole= "Customer";
+
     }
 }

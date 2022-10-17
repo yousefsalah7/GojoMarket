@@ -2,7 +2,7 @@
 
 <div class="">
     <form method="post">
-
+        <input asp-for="@Model.Product.Id" hidden />
         <div class="container backgroundWhite w-auto pt-4">
             <div class="card w-auto " style="border:1px solid #000000; ">
                 <div class="card-header w-auto bg-dark text-light m-0 row container" style="border-radius: 0px;width:100%">
@@ -38,16 +38,16 @@
                 <div class="card-footer w-auto bg-dark" style="width:100%">
                     <div class="row">
                         <div class="col-16 col-md-6 pb-0 ">
-                            <a asp-controller="Home" asp-action="Index" class="btn btn-success btn-square form-control btn-lg" style="height:50px;">Back to List</a>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-success btn-square form-control btn-lg" style="height:50px;">Back to List</a>
                         </div>
                         <div class="col-12 col-md-6 ">
                             @if (Model.ExistInCart)
                             {
-                                <a asp-controller="Home" asp-action="Index" class="btn btn-success btn-square form-control btn-lg" style="height:50px;">Back to List</a>
+                                <a asp-controller="Home" asp-action="Remove" asp-route-Id="@Model.Product.Id" class="btn btn-outline-warning btn-square form-control btn-lg" style="height:50px;">Remove From the Cart</a>
 
                             }else{
 
-                            <button type="submit" class="btn btn-info form-control btn-lg" style="height:50px;">Add to Cart</button>
+                                <button type="submit" asp-controller="Home" asp-action="Adding" class="btn btn-outline-info form-control btn-lg" asp-route-Id="@Model.Product.Id" style="height:50px;">Add to Cart</button>
                             }
 
                         </div>
